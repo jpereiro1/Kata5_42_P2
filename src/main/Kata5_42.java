@@ -9,15 +9,16 @@ import model.Mail;
 import view.HistogramDisplay;
 import view.MailHistogramBuilder;
 import view.MailListReader;
+import view.MailListReaderBD;
 
-public class Kata4_42 {
+public class Kata5_42 {
     
     Histogram<String> histogram;
     ArrayList<Mail> mailList;
     
     public static void main(String[] args) throws FileNotFoundException {
         
-        new Kata4_42().execute();
+        new Kata5_42().execute();
         
     }
     
@@ -28,8 +29,7 @@ public class Kata4_42 {
     }
 
     private void input() throws FileNotFoundException {
-        String fileName = "email.txt";
-        mailList = MailListReader.read(fileName);
+        mailList = MailListReaderBD.read();
     }
 
     private void process() {
