@@ -21,25 +21,24 @@ public class MailListReaderBD {
         
         ArrayList<Mail> mailList = new ArrayList<Mail>();
         
-        String sql = "SELECT * FROM PEOPLE";
+        String sql = "SELECT * FROM EMAIL";
         
-        try (Connection conn = this.connect();
+        try (Connection conn = MailListReaderBD.connect(fileName);
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)){
             
             while(rs.next()){
-                System.out.println(rs.getInt("Id")+ "\t" +
-                                   rs.getString("Name")+ "\t" +
-                                   rs.getString("Apellidos")+ "\t" +
-                                   rs.getString("Departamento"));
+                Mail mail = new Mail(rs.getString("Mail"));
+                mailList.add(mail);
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
+        return mailList;
     }
     
-    private Connection connect() {
-        String url = "jdbc:sqlite:KATA5.db";
+    private static Connection connect(String fileName) {
+        String url = fileName;
         Connection conn = null;
         try{
             conn = DriverManager.getConnection(url);

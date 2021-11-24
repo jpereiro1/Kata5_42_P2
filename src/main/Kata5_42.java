@@ -29,7 +29,7 @@ public class Kata5_42 {
     }
 
     private void input() throws FileNotFoundException {
-        mailList = MailListReaderBD.read();
+        mailList = MailListReaderBD.read("jdbc:sqlite:KATA5.db");
     }
 
     private void process() {
